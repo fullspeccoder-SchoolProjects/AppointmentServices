@@ -1,8 +1,10 @@
 package com.snhu;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Appointment {
+    final Date curDate = new Date(124, Calendar.JULY, 30);
     final String appointmentId;
     Date appointmentDate;
     String appointmentDescription;
@@ -10,6 +12,7 @@ public class Appointment {
     public Appointment(String id, Date date, String description) {
         checkIfPhraseIsNull(id);
         checkIfPhraseIsNull(description);
+        checkIfDateIsNull(date);
         checkLengthOfPhrase(id, 10);
         checkLengthOfPhrase(id, 50);
         checkIfDateInPast(date);
@@ -41,6 +44,7 @@ public class Appointment {
     }
 
     public void setDate(Date date) {
+        checkIfDateInPast(date);
         this.appointmentDate = date;
     }
 
@@ -56,8 +60,14 @@ public class Appointment {
         }
     }
 
+    private void checkIfDateIsNull(Date date) {
+        if(date == null) {
+            throw new NullPointerException("Date is null");
+        }
+    }
+
     private void checkIfDateInPast(Date date) {
-        if(date.before(new Date())) {
+        if(date.before(curDate)) {
             throw new IllegalArgumentException("Date is in the past");
         }
     }

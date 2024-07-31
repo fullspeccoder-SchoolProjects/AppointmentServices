@@ -45,7 +45,8 @@ class AppointmentTest {
 
     @Test
     void shouldNotCreateAppointmentWithLongDescription() {
-        assertThrows(IllegalArgumentException.class, () -> new Appointment("7961235098577123589713458", new Date(), "Get ha;kajsdgjhadgjafjkjagjldf;lkasdjflkjdfgjasdfhjalgj;klasfjkljsdjgfj;sdjgf;adjs;gaw;fghjadghjasbfjhsdbfvnkjfvhsdjvbhfjklsdjgkbasfvjkhasjkfbsdlhfjhanfkjshdjhlkjgvha;lsfh;jagircut"));
+        System.out.println("Get ha;kajsdgjhadgjafjkjagjldf;lkasdjflkjdfgjasdfhjalgj;klasfjkljsdjgfj;sdjgf;adjs;gaw;fghjadghjasbfjhsdbfvnkjfvhsdjvbhfjklsdjgkbasfvjkhasjkfbsdlhfjhanfkjshdjhlkjgvha;lsfh;jagircut".length());
+        assertThrows(IllegalArgumentException.class, () -> new Appointment("7000", new Date(), "Get ha;kajsdgjhadgjafjkjagjldf;lkasdjflkjdfgjasdfhjalgj;klasfjkljsdjgfj;sdjgf;adjs;gaw;fghjadghjasbfjhsdbfvnkjfvhsdjvbhfjklsdjgkbasfvjkhasjkfbsdlhfjhanfkjshdjhlkjgvha;lsfh;jagircut"));
     }
 
     @Test
@@ -69,26 +70,5 @@ class AppointmentTest {
     void getDescription() {
         Appointment appointment1 = new Appointment("5511", new Date(), "Get haircut");
         assertEquals("Get haircut", appointment1.getDescription());
-    }
-
-    @Test
-    void setDescription() {
-        Appointment appointment1 = new Appointment("5511", new Date(), "Get haircut");
-        appointment1.setDescription("Automotive Care");
-        assertEquals("Automotive Care", appointment1.getDescription());
-    }
-
-    @Test
-    void setDate() {
-        Appointment appointment1 = new Appointment("5511", new Date(), "Get haircut");
-        appointment1.setDate(new Date(125, Calendar.JANUARY, 3));
-
-        assertEquals(new Date(125, Calendar.JANUARY, 3), appointment1.getDate());
-    }
-
-    @Test
-    void shouldNotSetDate() {
-        Appointment appointment1 = new Appointment("5511", new Date(), "Get haircut");
-        assertThrows(IllegalArgumentException.class, () -> appointment1.setDate(new Date(122, Calendar.JANUARY, 3)));
     }
 }

@@ -10,11 +10,11 @@ public class Appointment {
     String appointmentDescription;
 
     public Appointment(String id, Date date, String description) {
-        checkIfPhraseIsNull(id);
-        checkIfPhraseIsNull(description);
+        checkIfPhraseIsNullOrEmpty(id);
+        checkIfPhraseIsNullOrEmpty(description);
         checkIfDateIsNull(date);
         checkLengthOfPhrase(id, 10);
-        checkLengthOfPhrase(id, 50);
+        checkLengthOfPhrase(description, 50);
         checkIfDateInPast(date);
         this.appointmentId = id;
         this.appointmentDate = date;
@@ -22,6 +22,8 @@ public class Appointment {
     }
 
     public Appointment(String id, Appointment appointment) {
+        checkIfPhraseIsNullOrEmpty(id);
+        checkLengthOfPhrase(id, 10);
         this.appointmentId = id;
         this.appointmentDate = appointment.getDate();
         this.appointmentDescription = appointment.getDescription();
@@ -39,24 +41,15 @@ public class Appointment {
         return appointmentDescription;
     }
 
-    public void setDescription(String description) {
-        this.appointmentDescription = description;
-    }
-
-    public void setDate(Date date) {
-        checkIfDateInPast(date);
-        this.appointmentDate = date;
-    }
-
     private void checkLengthOfPhrase(String phrase, int length) {
         if(phrase.length() > length) {
             throw new IllegalArgumentException(String.format("%s is too long", phrase));
         }
     }
 
-    private void checkIfPhraseIsNull(String phrase) {
-        if(phrase == null) {
-            throw new NullPointerException("String is null");
+    private void checkIfPhraseIsNullOrEmpty(String phrase) {
+        if(phrase == null || phrase.isEmpty()) {
+            throw new NullPointerException("String is null or empty");
         }
     }
 

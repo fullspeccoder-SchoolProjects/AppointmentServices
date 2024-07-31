@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class AppointmentServices {
-    final List<Appointment> appointments = new ArrayList<Appointment>();
+    final List<Appointment> appointments = new ArrayList<>();
+    int currentId = 3000;
 
-    public static int getCurrentId() {
+    public int getCurrentId() {
         return currentId;
     }
-
-    static int currentId = 3000;
 
     AppointmentServices() {
 
@@ -39,6 +38,9 @@ public class AppointmentServices {
     }
 
     void addAppointment(String id, Appointment appointment) {
+        if (id == null || id.isEmpty()) {
+            throw new NullPointerException("Appointment id cannot be null or empty");
+        }
         String formattedId = String.format("%s", currentId >= Integer.parseInt(id) ? currentId++ : id);
         appointments.add(new Appointment(formattedId, appointment));
         if(currentId < Integer.parseInt(id)) {
@@ -47,6 +49,9 @@ public class AppointmentServices {
     }
 
     void addAppointment(String id, Date date, String description) {
+        if (id == null || id.isEmpty()) {
+            throw new NullPointerException("Appointment id cannot be null or empty");
+        }
         String formattedId = String.format("%s", currentId >= Integer.parseInt(id) ? currentId++ : id);
         appointments.add(new Appointment(formattedId, date, description));
         if(currentId < Integer.parseInt(id)) {
